@@ -3,22 +3,25 @@ package br.org.soujava.servicos;
 import static br.org.soujava.utils.DataUtils.isMesmaData;
 import static br.org.soujava.utils.DataUtils.obterDataComDiferencaDias;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertThat;
 
 import java.util.Date;
 
-import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ErrorCollector;
 
 import br.org.soujava.entidades.Filme;
 import br.org.soujava.entidades.Locacao;
 import br.org.soujava.entidades.Usuario;
 
 public class LocacaoServiceTest {
+	
+	
+	@Rule
+	public ErrorCollector error = new ErrorCollector();
+	
 	@Test
-	public void teste() {
+	public void testeLocacao() {
 		
 		// cenário
 		LocacaoService service = new LocacaoService();
@@ -29,10 +32,9 @@ public class LocacaoServiceTest {
 		Locacao locacao = service.alugarFilme(usuario, filme);
 		
 		// validação
-		assertThat(locacao.getValor(), is(5.0));
-		assertThat(locacao.getValor(), is(not(6.0)));
-		assertThat(isMesmaData(locacao.getDataLocacao(), new Date()), is(true));
-		assertThat(isMesmaData(locacao.getDataRetorno(), obterDataComDiferencaDias(1)), is(true));
+		error.checkThat(locacao.getValor(), is(5.0));
+		error.checkThat(isMesmaData(locacao.getDataLocacao(), new Date()), is(true));
+		error.checkThat(isMesmaData(locacao.getDataRetorno(), obterDataComDiferencaDias(1)), is(true));
 		
 	}
 }
