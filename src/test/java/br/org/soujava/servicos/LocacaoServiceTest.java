@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 
 import java.util.Date;
 
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
@@ -63,6 +64,7 @@ public class LocacaoServiceTest {
 		// ação
 		try {
 			Locacao locacao = service.alugarFilme(usuario, filme);
+			Assert.fail("Deveria ter lançado uma exceção");
 		} catch (Exception e) {
 			assertThat(e.getMessage(), is("Filme sem estoque"));
 		}
