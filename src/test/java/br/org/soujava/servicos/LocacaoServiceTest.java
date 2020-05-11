@@ -37,4 +37,20 @@ public class LocacaoServiceTest {
 		error.checkThat(isMesmaData(locacao.getDataRetorno(), obterDataComDiferencaDias(1)), is(true));
 		
 	}
+	
+	
+	@Test(expected = Exception.class)
+	public void testeLocacao_filmeSemEstoque() throws Exception {
+		
+		// cenário
+		LocacaoService service = new LocacaoService();
+		Usuario usuario = new Usuario("Usuario 1");
+		Filme filme = new Filme("Filme 1", 0, 5.0);
+		
+		// ação
+		Locacao locacao = service.alugarFilme(usuario, filme);
+		
+		
+	}
+	
 }
