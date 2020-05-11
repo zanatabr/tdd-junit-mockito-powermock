@@ -4,6 +4,8 @@ import static br.org.soujava.utils.DataUtils.adicionarDias;
 
 import java.util.Date;
 
+import org.junit.Test;
+
 import br.org.soujava.entidades.Filme;
 import br.org.soujava.entidades.Locacao;
 import br.org.soujava.entidades.Usuario;
@@ -29,7 +31,8 @@ public class LocacaoService {
 		return locacao;
 	}
 
-	public static void main(String[] args) {
+	@Test
+	public void teste() {
 		
 		// cenário
 		LocacaoService service = new LocacaoService();
