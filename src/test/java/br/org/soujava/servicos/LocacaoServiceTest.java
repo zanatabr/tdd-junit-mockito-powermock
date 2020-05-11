@@ -6,6 +6,7 @@ import static org.hamcrest.CoreMatchers.is;
 
 import java.util.Date;
 
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
@@ -29,12 +30,20 @@ public class LocacaoServiceTest {
 		Filme filme = new Filme("Filme 1", 2, 5.0);
 		
 		// ação
-		Locacao locacao = service.alugarFilme(usuario, filme);
+		Locacao locacao;
+		try {
+			locacao = service.alugarFilme(usuario, filme);
+			
+			// validação
+			error.checkThat(locacao.getValor(), is(5.0));
+			error.checkThat(isMesmaData(locacao.getDataLocacao(), new Date()), is(true));
+			error.checkThat(isMesmaData(locacao.getDataRetorno(), obterDataComDiferencaDias(1)), is(true));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail("Não deveria lançar exceção");
+		}
 		
-		// validação
-		error.checkThat(locacao.getValor(), is(5.0));
-		error.checkThat(isMesmaData(locacao.getDataLocacao(), new Date()), is(true));
-		error.checkThat(isMesmaData(locacao.getDataRetorno(), obterDataComDiferencaDias(1)), is(true));
 		
 	}
 }
