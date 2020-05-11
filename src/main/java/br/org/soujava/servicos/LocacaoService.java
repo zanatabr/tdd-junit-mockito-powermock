@@ -7,6 +7,7 @@ import java.util.Date;
 import br.org.soujava.entidades.Filme;
 import br.org.soujava.entidades.Locacao;
 import br.org.soujava.entidades.Usuario;
+import br.org.soujava.utils.DataUtils;
 
 public class LocacaoService {
 	
@@ -40,9 +41,9 @@ public class LocacaoService {
 		
 		
 		// validação
-		System.out.println(locacao.getValor());
-		System.out.println(locacao.getDataLocacao());
-		System.out.println(locacao.getDataRetorno());
+		System.out.println(locacao.getValor() == 5.0);
+		System.out.println(DataUtils.isMesmaData(locacao.getDataLocacao(), new Date()));
+		System.out.println(DataUtils.isMesmaData(locacao.getDataRetorno(), DataUtils.obterDataComDiferencaDias(1)));
 		
 		
 		
